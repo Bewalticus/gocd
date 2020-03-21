@@ -31,8 +31,12 @@ import {TabContent} from "views/pages/clicky_pipeline_config/tabs/tab_content";
 import {TemplateEditor} from "views/pages/pipelines/template_editor";
 
 export class StagesTabContent extends TabContent<PipelineConfig> {
-  name() {
+  static tabName(): string {
     return "Stages";
+  }
+
+  public shouldShowSaveAndResetButtons(): boolean {
+    return false;
   }
 
   protected selectedEntity(pipelineConfig: PipelineConfig, routeParams: PipelineConfigRouteParams): PipelineConfig {

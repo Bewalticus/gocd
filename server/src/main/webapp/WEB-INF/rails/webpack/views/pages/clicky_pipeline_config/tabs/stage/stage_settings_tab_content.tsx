@@ -27,7 +27,7 @@ import {StageEditor} from "views/pages/clicky_pipeline_config/widgets/stage_edit
 import styles from "./stage_settings.scss";
 
 export class StageSettingsTabContent extends TabContent<Stage> {
-  name(): string {
+  static tabName(): string {
     return "Stage Settings";
   }
 
@@ -58,6 +58,7 @@ export class StageSettingsWidget extends MithrilViewComponent<Attrs> {
                    helpText={StageEditor.APPROVAL_TYPE_HELP}
                    field={stage.approval().typeAsStream()}
                    small={true}
+                   dataTestId="approval-checkbox"
                    onclick={StageSettingsWidget.approvalChange.bind(this, stage)}/>
       </div>
       <div class={styles.switchWrapper}>

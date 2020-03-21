@@ -78,10 +78,12 @@ public abstract class RuleAwarePluginProfile implements Validatable, RulesAware 
     public void addConfigurations(List<ConfigurationProperty> configurations) {
         ConfigurationPropertyBuilder builder = new ConfigurationPropertyBuilder();
         for (ConfigurationProperty property : configurations) {
+            final boolean isSecure = property.isSecure() || isSecure(property.getConfigKeyName());
+
             configuration.add(builder.create(property.getConfigKeyName(),
                     property.getConfigValue(),
                     property.getEncryptedValue(),
-                    isSecure(property.getConfigKeyName())));
+                    isSecure));
         }
     }
 
@@ -104,7 +106,8 @@ public abstract class RuleAwarePluginProfile implements Validatable, RulesAware 
     public void encryptSecureConfigurations() {
         if (hasPluginInfo()) {
             for (ConfigurationProperty configuration : this.getConfiguration()) {
-                configuration.handleSecureValueConfiguration(isSecure(configuration.getConfigKeyName()));
+                final boolean isSecure = configuration.isSecure() || isSecure(configuration.getConfigKeyName());
+                configuration.handleSecureValueConfiguration(isSecure);
             }
         }
     }

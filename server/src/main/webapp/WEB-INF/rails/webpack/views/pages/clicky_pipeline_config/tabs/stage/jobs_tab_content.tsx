@@ -31,8 +31,12 @@ import {PipelineConfigRouteParams} from "views/pages/clicky_pipeline_config/pipe
 import {TabContent} from "views/pages/clicky_pipeline_config/tabs/tab_content";
 
 export class JobsTabContent extends TabContent<Stage> {
-  name() {
+  static tabName(): string {
     return "Jobs";
+  }
+
+  public shouldShowSaveAndResetButtons(): boolean {
+    return false;
   }
 
   protected selectedEntity(pipelineConfig: PipelineConfig, routeParams: PipelineConfigRouteParams): Stage {
